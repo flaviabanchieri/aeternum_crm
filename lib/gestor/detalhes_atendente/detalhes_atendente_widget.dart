@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/widgets_compartilhados/header/header_widget.dart';
 import '/widgets_compartilhados/sidenav/sidenav_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -327,63 +326,6 @@ class _DetalhesAtendenteWidgetState extends State<DetalhesAtendenteWidget>
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
-                                                Container(
-                                                  width: 72.0,
-                                                  height: 72.0,
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .accent1,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12.0),
-                                                    border: Border.all(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      width: 2.0,
-                                                    ),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(2.0),
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                      child: CachedNetworkImage(
-                                                        fadeInDuration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                        fadeOutDuration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                        imageUrl:
-                                                            valueOrDefault<
-                                                                String>(
-                                                          detalhesAtendenteUsuarioRow
-                                                              ?.foto,
-                                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/aeternum-8xc5av/assets/w6b2te58678n/default-avatar-icon-of-social-media-user-vector.jpg',
-                                                        ),
-                                                        width: 44.0,
-                                                        height: 44.0,
-                                                        fit: BoxFit.cover,
-                                                        errorWidget: (context,
-                                                                error,
-                                                                stackTrace) =>
-                                                            Image.asset(
-                                                          'assets/images/error_image.jpg',
-                                                          width: 44.0,
-                                                          height: 44.0,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
                                                 Expanded(
                                                   child: Padding(
                                                     padding:

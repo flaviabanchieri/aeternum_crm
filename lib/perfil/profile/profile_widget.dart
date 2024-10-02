@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/widgets_compartilhados/header/header_widget.dart';
 import '/widgets_compartilhados/sidenav/sidenav_widget.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
@@ -226,21 +225,22 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                                     .circular(
                                                                         8.0),
                                                             child:
-                                                                CachedNetworkImage(
-                                                              fadeInDuration:
-                                                                  const Duration(
-                                                                      milliseconds:
-                                                                          500),
-                                                              fadeOutDuration:
-                                                                  const Duration(
-                                                                      milliseconds:
-                                                                          500),
-                                                              imageUrl:
-                                                                  FFAppState()
-                                                                      .FotoUsuario,
+                                                                Image.network(
+                                                              FFAppState()
+                                                                  .FotoUsuario,
                                                               width: 64.0,
                                                               height: 64.0,
                                                               fit: BoxFit.cover,
+                                                              errorBuilder: (context,
+                                                                      error,
+                                                                      stackTrace) =>
+                                                                  Image.asset(
+                                                                'assets/images/error_image.jpg',
+                                                                width: 64.0,
+                                                                height: 64.0,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
                                                             ),
                                                           ),
                                                         ),

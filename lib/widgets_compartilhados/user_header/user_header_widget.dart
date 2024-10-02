@@ -1,7 +1,6 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'user_header_model.dart';
@@ -67,13 +66,18 @@ class _UserHeaderWidgetState extends State<UserHeaderWidget> {
                     padding: const EdgeInsets.all(2.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
-                      child: CachedNetworkImage(
-                        fadeInDuration: const Duration(milliseconds: 500),
-                        fadeOutDuration: const Duration(milliseconds: 500),
-                        imageUrl: FFAppState().FotoUsuario,
+                      child: Image.network(
+                        FFAppState().FotoUsuario,
                         width: 42.0,
                         height: 42.0,
                         fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) =>
+                            Image.asset(
+                          'assets/images/error_image.jpg',
+                          width: 42.0,
+                          height: 42.0,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
