@@ -25,6 +25,15 @@ class DetalhesAtendenteModel extends FlutterFlowModel<DetalhesAtendenteWidget> {
 
   String? codigo;
 
+  List<dynamic> pontoLista = [];
+  void addToPontoLista(dynamic item) => pontoLista.add(item);
+  void removeFromPontoLista(dynamic item) => pontoLista.remove(item);
+  void removeAtIndexFromPontoLista(int index) => pontoLista.removeAt(index);
+  void insertAtIndexInPontoLista(int index, dynamic item) =>
+      pontoLista.insert(index, item);
+  void updatePontoListaAtIndex(int index, Function(dynamic) updateFn) =>
+      pontoLista[index] = updateFn(pontoLista[index]);
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (Relatorio Ligacoes)] action in detalhesAtendente widget.
@@ -43,6 +52,8 @@ class DetalhesAtendenteModel extends FlutterFlowModel<DetalhesAtendenteWidget> {
   ApiCallResponse? pesquisaApiFaturamento;
   // Stores action output result for [Backend Call - Query Rows] action in detalhesAtendente widget.
   List<UsuarioRow>? supabaseAtendente;
+  // Stores action output result for [Backend Call - API (getUsuarioPontoLista)] action in detalhesAtendente widget.
+  ApiCallResponse? pontoUsuario;
   // Model for Sidenav component.
   late SidenavModel sidenavModel;
   // Model for header component.

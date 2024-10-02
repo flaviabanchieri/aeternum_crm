@@ -101,6 +101,10 @@ class _DetalhesAtendenteWidgetState extends State<DetalhesAtendenteWidget>
           widget.atendenteId,
         ),
       );
+      _model.pontoUsuario = await GetUsuarioPontoListaCall.call(
+        userId: widget.atendenteId,
+      );
+
       _model.vendasRealizadas = getJsonField(
         (_model.vendas?.jsonBody ?? ''),
         r'''$''',
@@ -133,6 +137,8 @@ class _DetalhesAtendenteWidgetState extends State<DetalhesAtendenteWidget>
         _model.supabaseAtendente?.first.codigoPayt,
         'Sem código',
       );
+      _model.pontoLista =
+          (_model.pontoUsuario?.jsonBody ?? '').toList().cast<dynamic>();
       safeSetState(() {});
     });
 
@@ -773,73 +779,84 @@ class _DetalhesAtendenteWidgetState extends State<DetalhesAtendenteWidget>
                                                           BorderRadius.circular(
                                                               8.0),
                                                     ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  12.0,
-                                                                  12.0,
-                                                                  12.0,
-                                                                  0.0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Icon(
-                                                            Icons
-                                                                .timelapse_sharp,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primary,
-                                                            size: 44.0,
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        8.0,
-                                                                        0.0,
-                                                                        4.0),
-                                                            child: Text(
-                                                              valueOrDefault<
-                                                                  String>(
-                                                                _model
-                                                                    .tempoMedio,
-                                                                '00:00:00',
+                                                    child: Visibility(
+                                                      visible:
+                                                          responsiveVisibility(
+                                                        context: context,
+                                                        phone: false,
+                                                        tablet: false,
+                                                        tabletLandscape: false,
+                                                        desktop: false,
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    12.0,
+                                                                    12.0,
+                                                                    12.0,
+                                                                    0.0),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Icon(
+                                                              Icons
+                                                                  .timelapse_sharp,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primary,
+                                                              size: 44.0,
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          8.0,
+                                                                          0.0,
+                                                                          4.0),
+                                                              child: Text(
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  _model
+                                                                      .tempoMedio,
+                                                                  '00:00:00',
+                                                                ),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .headlineSmall
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Outfit',
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
                                                               ),
+                                                            ),
+                                                            Text(
+                                                              'Tempo medio por ligação',
                                                               textAlign:
                                                                   TextAlign
                                                                       .center,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .headlineSmall
+                                                                  .labelMedium
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Outfit',
+                                                                        'Manrope',
                                                                     letterSpacing:
                                                                         0.0,
                                                                   ),
                                                             ),
-                                                          ),
-                                                          Text(
-                                                            'Tempo medio por ligação',
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .labelMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Manrope',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   ).animateOnPageLoad(animationsMap[
@@ -2395,101 +2412,111 @@ class _DetalhesAtendenteWidgetState extends State<DetalhesAtendenteWidget>
                                                                         final listViewGetUsuarioPontoListaResponse =
                                                                             snapshot.data!;
 
-                                                                        return ListView(
-                                                                          padding:
-                                                                              EdgeInsets.zero,
-                                                                          shrinkWrap:
-                                                                              true,
-                                                                          scrollDirection:
-                                                                              Axis.vertical,
-                                                                          children: [
-                                                                            Container(
-                                                                              width: 100.0,
-                                                                              height: 51.0,
-                                                                              decoration: BoxDecoration(
-                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                              ),
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                                                                                child: Row(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  children: [
-                                                                                    if (responsiveVisibility(
-                                                                                      context: context,
-                                                                                      phone: false,
-                                                                                    ))
-                                                                                      Expanded(
-                                                                                        flex: 2,
-                                                                                        child: Text(
-                                                                                          valueOrDefault<String>(
-                                                                                            dateTimeFormat(
-                                                                                              "dd/MM/yyyy hh:MM",
-                                                                                              functions.converterStringParaData(valueOrDefault<String>(
-                                                                                                GetUsuarioPontoListaCall.horaEntrada(
-                                                                                                  listViewGetUsuarioPontoListaResponse.jsonBody,
+                                                                        return Builder(
+                                                                          builder:
+                                                                              (context) {
+                                                                            final ponto =
+                                                                                _model.pontoLista.toList();
+
+                                                                            return ListView.builder(
+                                                                              padding: EdgeInsets.zero,
+                                                                              shrinkWrap: true,
+                                                                              scrollDirection: Axis.vertical,
+                                                                              itemCount: ponto.length,
+                                                                              itemBuilder: (context, pontoIndex) {
+                                                                                final pontoItem = ponto[pontoIndex];
+                                                                                return Container(
+                                                                                  width: 100.0,
+                                                                                  height: 51.0,
+                                                                                  decoration: BoxDecoration(
+                                                                                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                  ),
+                                                                                  child: Padding(
+                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                                                                                    child: Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      children: [
+                                                                                        if (responsiveVisibility(
+                                                                                          context: context,
+                                                                                          phone: false,
+                                                                                        ))
+                                                                                          Expanded(
+                                                                                            flex: 2,
+                                                                                            child: Text(
+                                                                                              valueOrDefault<String>(
+                                                                                                dateTimeFormat(
+                                                                                                  "dd/MM/yyyy hh:MM",
+                                                                                                  functions.converterStringParaData(valueOrDefault<String>(
+                                                                                                    getJsonField(
+                                                                                                      pontoItem,
+                                                                                                      r'''$.clock_in''',
+                                                                                                    )?.toString(),
+                                                                                                    '-',
+                                                                                                  )),
+                                                                                                  locale: FFLocalizations.of(context).languageCode,
                                                                                                 ),
                                                                                                 '-',
-                                                                                              )),
-                                                                                              locale: FFLocalizations.of(context).languageCode,
-                                                                                            ),
-                                                                                            '-',
-                                                                                          ),
-                                                                                          style: FlutterFlowTheme.of(context).labelSmall.override(
-                                                                                                fontFamily: 'Manrope',
-                                                                                                letterSpacing: 0.0,
                                                                                               ),
-                                                                                        ),
-                                                                                      ),
-                                                                                    if (responsiveVisibility(
-                                                                                      context: context,
-                                                                                      phone: false,
-                                                                                    ))
-                                                                                      Expanded(
-                                                                                        flex: 2,
-                                                                                        child: Text(
-                                                                                          valueOrDefault<String>(
-                                                                                            dateTimeFormat(
-                                                                                              "dd/MM/yyyy hh:MM",
-                                                                                              functions.converterStringParaData(valueOrDefault<String>(
-                                                                                                GetUsuarioPontoListaCall.horaSaida(
-                                                                                                  listViewGetUsuarioPontoListaResponse.jsonBody,
+                                                                                              style: FlutterFlowTheme.of(context).labelSmall.override(
+                                                                                                    fontFamily: 'Manrope',
+                                                                                                    letterSpacing: 0.0,
+                                                                                                  ),
+                                                                                            ),
+                                                                                          ),
+                                                                                        if (responsiveVisibility(
+                                                                                          context: context,
+                                                                                          phone: false,
+                                                                                        ))
+                                                                                          Expanded(
+                                                                                            flex: 2,
+                                                                                            child: Text(
+                                                                                              valueOrDefault<String>(
+                                                                                                dateTimeFormat(
+                                                                                                  "dd/MM/yyyy hh:MM",
+                                                                                                  functions.converterStringParaData(valueOrDefault<String>(
+                                                                                                    getJsonField(
+                                                                                                      pontoItem,
+                                                                                                      r'''$.clock_out''',
+                                                                                                    )?.toString(),
+                                                                                                    '-',
+                                                                                                  )),
+                                                                                                  locale: FFLocalizations.of(context).languageCode,
                                                                                                 ),
                                                                                                 '-',
-                                                                                              )),
-                                                                                              locale: FFLocalizations.of(context).languageCode,
-                                                                                            ),
-                                                                                            '-',
-                                                                                          ),
-                                                                                          style: FlutterFlowTheme.of(context).labelSmall.override(
-                                                                                                fontFamily: 'Manrope',
-                                                                                                letterSpacing: 0.0,
                                                                                               ),
-                                                                                        ),
-                                                                                      ),
-                                                                                    if (responsiveVisibility(
-                                                                                      context: context,
-                                                                                      phone: false,
-                                                                                    ))
-                                                                                      Expanded(
-                                                                                        flex: 2,
-                                                                                        child: Text(
-                                                                                          valueOrDefault<String>(
-                                                                                            GetUsuarioPontoListaCall.tempoPermanencia(
-                                                                                              listViewGetUsuarioPontoListaResponse.jsonBody,
+                                                                                              style: FlutterFlowTheme.of(context).labelSmall.override(
+                                                                                                    fontFamily: 'Manrope',
+                                                                                                    letterSpacing: 0.0,
+                                                                                                  ),
                                                                                             ),
-                                                                                            '-',
                                                                                           ),
-                                                                                          style: FlutterFlowTheme.of(context).labelSmall.override(
-                                                                                                fontFamily: 'Manrope',
-                                                                                                letterSpacing: 0.0,
+                                                                                        if (responsiveVisibility(
+                                                                                          context: context,
+                                                                                          phone: false,
+                                                                                        ))
+                                                                                          Expanded(
+                                                                                            flex: 2,
+                                                                                            child: Text(
+                                                                                              valueOrDefault<String>(
+                                                                                                getJsonField(
+                                                                                                  pontoItem,
+                                                                                                  r'''$.tempo_permanencia''',
+                                                                                                )?.toString(),
+                                                                                                '-',
                                                                                               ),
-                                                                                        ),
-                                                                                      ),
-                                                                                  ],
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ],
+                                                                                              style: FlutterFlowTheme.of(context).labelSmall.override(
+                                                                                                    fontFamily: 'Manrope',
+                                                                                                    letterSpacing: 0.0,
+                                                                                                  ),
+                                                                                            ),
+                                                                                          ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                );
+                                                                              },
+                                                                            );
+                                                                          },
                                                                         );
                                                                       },
                                                                     ),
