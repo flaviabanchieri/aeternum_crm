@@ -599,6 +599,9 @@ class _LeadOpenWidgetState extends State<LeadOpenWidget>
                                       await LeadTable().update(
                                         data: {
                                           'status': 1,
+                                          'data_agendamento':
+                                              supaSerialize<DateTime>(
+                                                  functions.adicionarHoras(2)),
                                         },
                                         matchingRows: (rows) => rows.eq(
                                           'id',

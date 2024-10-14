@@ -239,3 +239,8 @@ double? progress(
           ? 0
           : progress;
 }
+
+DateTime? adicionarHoras(int horas) {
+  // return datetime in 1 hour from now
+  return DateTime.now().add(Duration(hours: horas));
+}

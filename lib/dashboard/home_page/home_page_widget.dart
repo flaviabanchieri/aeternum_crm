@@ -158,233 +158,41 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           return;
         }
       }
-      _model.queryLeadCarrinhoAbandonado = await ViewLeadTable().queryRows(
-        queryFn: (q) => q
-            .eq(
-              'usuario',
-              currentUserUid,
-            )
-            .eq(
-              'status',
-              1,
-            )
-            .eq(
-              'origem',
-              'Carrinho Abandonado',
-            ),
+      _model.proximo = await ProximoLeadCall.call(
+        user: currentUserUid,
       );
-      _model.leadCarrinhoAbandonado = valueOrDefault<int>(
-        _model.queryLeadCarrinhoAbandonado?.length,
+
+      _model.nomeLead = valueOrDefault<String>(
+        ProximoLeadCall.nome(
+          (_model.proximo?.jsonBody ?? ''),
+        ),
+        '-',
+      );
+      _model.telefoneLead = valueOrDefault<String>(
+        ProximoLeadCall.telefone(
+          (_model.proximo?.jsonBody ?? ''),
+        ),
+        '-',
+      );
+      _model.nomeProduto = valueOrDefault<String>(
+        ProximoLeadCall.produto(
+          (_model.proximo?.jsonBody ?? ''),
+        ),
+        '-',
+      );
+      _model.origemLead = valueOrDefault<String>(
+        ProximoLeadCall.origem(
+          (_model.proximo?.jsonBody ?? ''),
+        ),
+        '-',
+      );
+      _model.idLead = valueOrDefault<int>(
+        ProximoLeadCall.id(
+          (_model.proximo?.jsonBody ?? ''),
+        ),
         0,
       );
       safeSetState(() {});
-      if (_model.leadCarrinhoAbandonado! > 0) {
-        _model.nomeLead = valueOrDefault<String>(
-          _model.queryLeadCarrinhoAbandonado?.first.nomeLead,
-          'Nome',
-        );
-        _model.telefoneLead = valueOrDefault<String>(
-          _model.queryLeadCarrinhoAbandonado?.first.telefone,
-          'Telefone',
-        );
-        _model.nomeProduto = valueOrDefault<String>(
-          _model.queryLeadCarrinhoAbandonado?.first.nomeProduto,
-          'Produto',
-        );
-        _model.origemLead = valueOrDefault<String>(
-          _model.queryLeadCarrinhoAbandonado?.first.origem,
-          'Origem',
-        );
-        _model.idLead = _model.queryLeadCarrinhoAbandonado?.first.idLead;
-        safeSetState(() {});
-        return;
-      } else {
-        _model.queryLeadCartaoCancelado = await ViewLeadTable().queryRows(
-          queryFn: (q) => q
-              .eq(
-                'usuario',
-                currentUserUid,
-              )
-              .eq(
-                'status',
-                1,
-              )
-              .eq(
-                'origem',
-                'Cancelado',
-              ),
-        );
-        _model.leadCartaoCancelado = valueOrDefault<int>(
-          _model.queryLeadCartaoCancelado?.length,
-          0,
-        );
-        safeSetState(() {});
-        if (_model.leadCartaoCancelado! > 0) {
-          _model.nomeLead = valueOrDefault<String>(
-            _model.queryLeadCartaoCancelado?.first.nomeLead,
-            'Nome',
-          );
-          _model.telefoneLead = valueOrDefault<String>(
-            _model.queryLeadCartaoCancelado?.first.telefone,
-            'Telefone',
-          );
-          _model.nomeProduto = valueOrDefault<String>(
-            _model.queryLeadCartaoCancelado?.first.nomeProduto,
-            'Produto',
-          );
-          _model.origemLead = valueOrDefault<String>(
-            _model.queryLeadCartaoCancelado?.first.origem,
-            'Origem',
-          );
-          _model.idLead = valueOrDefault<int>(
-            _model.queryLeadCartaoCancelado?.first.idLead,
-            0,
-          );
-          safeSetState(() {});
-          return;
-        } else {
-          _model.queryLeadPix = await ViewLeadTable().queryRows(
-            queryFn: (q) => q
-                .eq(
-                  'usuario',
-                  currentUserUid,
-                )
-                .eq(
-                  'status',
-                  1,
-                )
-                .eq(
-                  'origem',
-                  'Aguardando Pagamento',
-                ),
-          );
-          _model.leadPix = valueOrDefault<int>(
-            _model.queryLeadPix?.length,
-            0,
-          );
-          safeSetState(() {});
-          if (_model.leadPix! > 0) {
-            _model.nomeLead = valueOrDefault<String>(
-              _model.queryLeadPix?.first.nomeLead,
-              'Lead',
-            );
-            _model.telefoneLead = valueOrDefault<String>(
-              _model.queryLeadPix?.first.telefone,
-              'Telefone',
-            );
-            _model.nomeProduto = valueOrDefault<String>(
-              _model.queryLeadPix?.first.nomeProduto,
-              'Produto',
-            );
-            _model.origemLead = valueOrDefault<String>(
-              _model.queryLeadPix?.first.origem,
-              'Origem',
-            );
-            _model.idLead = valueOrDefault<int>(
-              _model.queryLeadPix?.first.idLead,
-              0,
-            );
-            safeSetState(() {});
-            return;
-          } else {
-            _model.queryLeadUpsell = await ViewLeadTable().queryRows(
-              queryFn: (q) => q
-                  .eq(
-                    'usuario',
-                    currentUserUid,
-                  )
-                  .eq(
-                    'status',
-                    1,
-                  )
-                  .eq(
-                    'origem',
-                    'Upsell',
-                  ),
-            );
-            _model.outrosLeads = valueOrDefault<int>(
-              _model.queryLeadUpsell?.length,
-              0,
-            );
-            safeSetState(() {});
-            if (_model.outrosLeads! > 0) {
-              _model.nomeLead = valueOrDefault<String>(
-                _model.queryLeadUpsell?.first.nomeLead,
-                'Lead',
-              );
-              _model.telefoneLead = valueOrDefault<String>(
-                _model.queryLeadUpsell?.first.telefone,
-                'Telefone',
-              );
-              _model.nomeProduto = valueOrDefault<String>(
-                _model.queryLeadUpsell?.first.nomeProduto,
-                'Produto',
-              );
-              _model.origemLead = valueOrDefault<String>(
-                _model.queryLeadUpsell?.first.origem,
-                'Origem',
-              );
-              _model.idLead = valueOrDefault<int>(
-                _model.queryLeadUpsell?.first.idLead,
-                0,
-              );
-              safeSetState(() {});
-              return;
-            } else {
-              _model.queryLeadAgendaAtrasada = await ViewLeadTable().queryRows(
-                queryFn: (q) => q
-                    .eq(
-                      'data_filtro',
-                      dateTimeFormat(
-                        "dd/MM/yyyy",
-                        functions.dataAtual(),
-                        locale: FFLocalizations.of(context).languageCode,
-                      ),
-                    )
-                    .eq(
-                      'usuario',
-                      currentUserUid,
-                    )
-                    .lte(
-                      'status',
-                      2,
-                    ),
-              );
-              _model.countAtrasados = valueOrDefault<int>(
-                _model.queryLeadAgendaAtrasada?.length,
-                0,
-              );
-              safeSetState(() {});
-              if (_model.countAtrasados! > 0) {
-                _model.nomeLead = valueOrDefault<String>(
-                  _model.queryLeadAgendaAtrasada?.first.nomeLead,
-                  'Lead',
-                );
-                _model.telefoneLead = valueOrDefault<String>(
-                  _model.queryLeadAgendaAtrasada?.first.nomeLead,
-                  'Telefone',
-                );
-                _model.nomeProduto = valueOrDefault<String>(
-                  _model.queryLeadAgendaAtrasada?.first.nomeProduto,
-                  'Produto',
-                );
-                _model.origemLead = valueOrDefault<String>(
-                  _model.queryLeadAgendaAtrasada?.first.origem,
-                  'Origem',
-                );
-                _model.idLead = valueOrDefault<int>(
-                  _model.queryLeadAgendaAtrasada?.first.idLead,
-                  0,
-                );
-                safeSetState(() {});
-                return;
-              } else {
-                return;
-              }
-            }
-          }
-        }
-      }
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));

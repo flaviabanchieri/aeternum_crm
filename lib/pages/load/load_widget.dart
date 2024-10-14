@@ -285,7 +285,7 @@ class _LoadWidgetState extends State<LoadWidget> {
                         context.goNamedAuth('Login', context.mounted);
                       },
                       child: Lottie.asset(
-                        'assets/lottie_animations/Animation_-_Loading.json',
+                        'assets/jsons/Animation_-_Loading.json',
                         width: 266.0,
                         height: 200.0,
                         fit: BoxFit.contain,

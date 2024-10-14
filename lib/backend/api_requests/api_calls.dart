@@ -820,6 +820,50 @@ class ConcluirAntigosDiasOuMaisCall {
   }
 }
 
+class ProximoLeadCall {
+  static Future<ApiCallResponse> call({
+    String? user = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'ProximoLead',
+      apiUrl:
+          'https://n8n-n8n.7jlhvw.easypanel.host/webhook/a4d81fef-b83f-4968-87b8-93d77fe47277',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'user': user,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static String? nome(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.nome''',
+      ));
+  static String? telefone(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.telefone''',
+      ));
+  static int? id(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.id''',
+      ));
+  static String? origem(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.origem''',
+      ));
+  static String? produto(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.produto_nome''',
+      ));
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

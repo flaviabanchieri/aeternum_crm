@@ -54,16 +54,8 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   List<RankingRow>? listaHankingInicial;
   // Stores action output result for [Backend Call - Query Rows] action in HomePage widget.
   List<ViewLeadRow>? retornoLeadsAgendadosHoje;
-  // Stores action output result for [Backend Call - Query Rows] action in HomePage widget.
-  List<ViewLeadRow>? queryLeadCarrinhoAbandonado;
-  // Stores action output result for [Backend Call - Query Rows] action in HomePage widget.
-  List<ViewLeadRow>? queryLeadCartaoCancelado;
-  // Stores action output result for [Backend Call - Query Rows] action in HomePage widget.
-  List<ViewLeadRow>? queryLeadPix;
-  // Stores action output result for [Backend Call - Query Rows] action in HomePage widget.
-  List<ViewLeadRow>? queryLeadUpsell;
-  // Stores action output result for [Backend Call - Query Rows] action in HomePage widget.
-  List<ViewLeadRow>? queryLeadAgendaAtrasada;
+  // Stores action output result for [Backend Call - API (ProximoLead)] action in HomePage widget.
+  ApiCallResponse? proximo;
   // Model for Sidenav component.
   late SidenavModel sidenavModel;
   // Model for header component.
